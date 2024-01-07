@@ -15,7 +15,6 @@ code {
 .header {
     margin-top: 1rem;
     border-bottom: 2px solid #ccc;
-
 }
 
 .footer {
@@ -28,6 +27,8 @@ code {
     margin: 0;
     padding: 0;
 }
+
+/* form */
 
 h2{
     color:#22b934;
@@ -42,4 +43,17 @@ h2{
 .linkList{
     color: black;
     text-decoration: none;
+}
+
+.saveButton {
+    background-color: #22b934;
+    border: none;
+    color: white;
+    border-width: 2px;
+    border-radius: 15px; 
+    cursor: pointer;
+    display: block;
+    margin: auto; 
+    width: 50%;
+    font-size: medium;
 }
