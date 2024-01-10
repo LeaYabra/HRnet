@@ -5,8 +5,8 @@ import {
   Action,
 } from "@reduxjs/toolkit"
 import storage from "redux-persist/lib/storage"
-import counterReducer from "../features/counter/counterSlice"
 import { persistStore, persistReducer } from "redux-persist"
+import formReducer from "../features/form/reducer"
 
 const persistConfig = {
   key: "newRootKey",
@@ -14,7 +14,7 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-  counter: counterReducer,
+  form: formReducer,
 })
 
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducer)

@@ -2,8 +2,6 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import { Provider, useSelector } from "react-redux"
 import { store, persistor, RootState } from "./app/store"
-import App from "./App"
-import "./index.css"
 import { PersistGate } from "redux-persist/integration/react"
 
 import {
