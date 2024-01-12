@@ -1,6 +1,4 @@
 export interface FormState {
-  success: boolean
-  error: string | null
   firstName: string
   lastName: string
   dateOfBirth: Date | null
@@ -8,13 +6,11 @@ export interface FormState {
   department: string
   street: string
   city: string
-  states: Array<any>
-  zipCode: string
+  states: string | null
+  zipCode: number | null
 }
 
 export const initialState: FormState = {
-  success: false,
-  error: null,
   firstName: "",
   lastName: "",
   dateOfBirth: null,
@@ -22,8 +18,8 @@ export const initialState: FormState = {
   department: "",
   street: "",
   city: "",
-  states: [],
-  zipCode: "",
+  states: null,
+  zipCode: null,
 }
 
 const formReducer = (state = initialState, action: any) => {
@@ -31,8 +27,6 @@ const formReducer = (state = initialState, action: any) => {
     case "SAVE_EMPLOYEE":
       return {
         ...state,
-        success: true,
-        error: null,
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         dateOfBirth: action.payload.dateOfBirth,
@@ -46,8 +40,6 @@ const formReducer = (state = initialState, action: any) => {
     case "FAILURE_SAVE":
       return {
         ...state,
-        success: false,
-        error: action.payload.error,
         firstName: "",
         lastName: "",
         dateOfBirth: null,

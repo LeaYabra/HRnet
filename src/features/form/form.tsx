@@ -1,113 +1,152 @@
-import { useState } from "react"
-import { Button, DatePicker, Form, Input, InputNumber, Select } from "antd"
+import { Form, Input, Button, DatePicker, Select, ConfigProvider } from "antd"
+import { useForm } from "antd/lib/form/Form"
 import { useDispatch, useSelector } from "react-redux"
-import { saveFormEmployee } from "./actions"
 import { RootState } from "../../app/store"
+import { saveFormEmployee } from "./actions"
 import { AppDispatch } from "../../app/store"
 import states from "./states"
 
-const CustomForm = () => {
+type FieldType = {
+  firstName: string
+  lastName: string
+  dateOfBirth: any
+  startDate: any
+  street: string
+  city: string
+  states: string
+  zipCode: number
+  department: string
+}
+
+const App = () => {
+  const [form] = useForm<FieldType>()
   const dispatch: AppDispatch = useDispatch()
   const formState = useSelector((state: RootState) => state.form)
 
-  const [formData, setFormData] = useState({
-    success: formState.success,
-    error: formState.error,
-    firstName: formState.firstName,
-    lastName: formState.lastName,
-    dateOfBirth: formState.dateOfBirth,
-    startDate: formState.startDate,
-    department: formState.department,
-    street: formState.street,
-    city: formState.city,
-    states: formState.states,
-    zipCode: formState.zipCode,
-  })
+  const onFinish = (values: FieldType) => {
+    const formData = {
+      ...values,
+      dateOfBirth: values.dateOfBirth.format("DD-MM-YYYY"),
+      startDate: values["startDate"].format("DD-MM-YYYY"),
+    }
 
-  const handleInputChange = (field: string, value: any) => {
-    setFormData({
-      ...formData,
-      [field]: value,
-    })
+    // Dispatch action pour mettre à jour l'état du formulaire dans Redux
+    //dispatch(saveFormEmployee(formData))
+
+    console.log("Success:", formData)
   }
 
-  const handleSaveEmployee = () => {
-    dispatch(saveFormEmployee(formData))
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo)
   }
 
   return (
-    <>
-      <Form
-        labelCol={{ span: 12 }}
-        wrapperCol={{ span: 20 }}
-        layout="vertical"
-        style={{ minWidth: 300, maxWidth: 600 }}
+    <Form
+      form={form}
+      name="basic"
+      labelCol={{ span: 12 }}
+      wrapperCol={{ span: 20 }}
+      style={{ minWidth: 300, maxWidth: 600 }}
+      layout="vertical"
+      initialValues={{
+        states: "Alabama",
+        department: "sales",
+      }}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      autoComplete="off"
+    >
+      <Form.Item<FieldType>
+        label="First Name"
+        name="firstName"
+        rules={[{ required: true, message: "Please input your First Name!" }]}
       >
-        <Form.Item label="FirstName">
-          <Input
-            onChange={(e) => handleInputChange("firstName", e.target.value)}
-          />
+        <Input />
+      </Form.Item>
+
+      <Form.Item<FieldType>
+        label="Last Name"
+        name="lastName"
+        rules={[{ required: true, message: "Please input your Last Name!" }]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item<FieldType>
+        label="Date of Birth"
+        name="dateOfBirth"
+        rules={[
+          { required: true, message: "Please input your Date of Birth!" },
+        ]}
+      >
+        <DatePicker format="DD-MM-YYYY" />
+      </Form.Item>
+
+      <Form.Item<FieldType>
+        label="Start Date"
+        name="startDate"
+        rules={[{ required: true, message: "Please input your Start Date!" }]}
+      >
+        <DatePicker format="DD-MM-YYYY" />
+      </Form.Item>
+
+      <fieldset name="address">
+        <legend>Address</legend>
+        <Form.Item<FieldType>
+          label="Street"
+          name="street"
+          rules={[{ required: true, message: "Please input your Street!" }]}
+        >
+          <Input />
         </Form.Item>
-        <Form.Item label="LastName">
-          <Input
-            onChange={(e) => handleInputChange("lastName", e.target.value)}
-          />
+        <Form.Item<FieldType>
+          label="City"
+          name="city"
+          rules={[{ required: true, message: "Please input your City!" }]}
+        >
+          <Input />
         </Form.Item>
-        <Form.Item label="Date of Birth">
-          <DatePicker format="DD-MM-YYYY" />
-        </Form.Item>
-        <Form.Item label="Start Date">
-          <DatePicker format="DD-MM-YYYY" />
-        </Form.Item>
-        <fieldset name="address">
-          <legend>Address</legend>
-          <Form.Item label="Street">
-            <Input
-              onChange={(e) => handleInputChange("street", e.target.value)}
-            />
-          </Form.Item>
-          <Form.Item label="City">
-            <Input
-              onChange={(e) => handleInputChange("city", e.target.value)}
-            />
-          </Form.Item>
-          <Form.Item label="States">
-            <Select
-              value={formData.states}
-              onChange={(value) => handleInputChange("states", value)}
-            >
-              {states.map((state: any) => (
-                <Select.Option key={state.abbreviation} value={state.name}>
-                  {state.name}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
-          <Form.Item label="Zip Code">
-            <InputNumber
-              onChange={(value) => handleInputChange("zipCode", value)}
-            />
-          </Form.Item>
-        </fieldset>
-        <Form.Item label="Department">
-          <Select onChange={(value) => handleInputChange("department", value)}>
-            <Select.Option value="sales">Sales</Select.Option>
-            <Select.Option value="Marketing">Marketing</Select.Option>
-            <Select.Option value="engineering">Engineering</Select.Option>
-            <Select.Option value="human resources">
-              Human Resources
-            </Select.Option>
-            <Select.Option value="legal">Legal</Select.Option>
+        <Form.Item<FieldType> label="States" name="states">
+          <Select value={formState.states}>
+            {states.map((state: any) => (
+              <Select.Option key={state.abbreviation} value={state.name}>
+                {state.name}
+              </Select.Option>
+            ))}
           </Select>
         </Form.Item>
-        <Form.Item>
-          <Button className="saveButton" onClick={handleSaveEmployee}>
+        <Form.Item<FieldType>
+          label="Zip Code"
+          name="zipCode"
+          rules={[{ required: true, message: "Please input your Zip Code!" }]}
+        >
+          <Input />
+        </Form.Item>
+      </fieldset>
+      <Form.Item<FieldType> label="Department" name="department">
+        <Select>
+          <Select.Option value="sales">Sales</Select.Option>
+          <Select.Option value="Marketing">Marketing</Select.Option>
+          <Select.Option value="engineering">Engineering</Select.Option>
+          <Select.Option value="human resources">Human Resources</Select.Option>
+          <Select.Option value="legal">Legal</Select.Option>
+        </Select>
+      </Form.Item>
+
+      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorBgTextHover: "#FFFF",
+            },
+          }}
+        >
+          <Button htmlType="submit" className="saveButton">
             Save
           </Button>
-        </Form.Item>
-      </Form>
-    </>
+        </ConfigProvider>
+      </Form.Item>
+    </Form>
   )
 }
-
-export default CustomForm
+export default App
