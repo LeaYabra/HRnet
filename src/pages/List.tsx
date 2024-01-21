@@ -1,6 +1,6 @@
 import "../designs/styles.css"
 import Header from "../components/header"
-import Employee from "../features/table/employee"
+import Employee from "../features/employee/employee"
 import Footer from "../components/footer"
 function Home() {
   return (

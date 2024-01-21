@@ -2,7 +2,7 @@ import { Form, Input, Button, DatePicker, Select, ConfigProvider } from "antd"
 import { useForm } from "antd/lib/form/Form"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../app/store"
-import { saveFormEmployee } from "./actions"
+import { saveEmployee } from "../employee/actions"
 import { AppDispatch } from "../../app/store"
 import states from "./states"
 
@@ -20,8 +20,8 @@ type FieldType = {
 
 const App = () => {
   const [form] = useForm<FieldType>()
-  const dispatch: AppDispatch = useDispatch()
-  const formState = useSelector((state: RootState) => state.form)
+  const dispatch = useDispatch()
+  const formState = useSelector((state: RootState) => state.Employees)
 
   const onFinish = (values: FieldType) => {
     const formData = {
@@ -31,7 +31,9 @@ const App = () => {
     }
 
     // Dispatch action pour mettre à jour l'état du formulaire dans Redux
-    //dispatch(saveFormEmployee(formData))
+    // dispatch(saveFormEmployee(formData))
+    //dispatch(addEmployee(formData))
+    dispatch(saveEmployee(formData))
 
     console.log("Success:", formData)
   }
@@ -141,7 +143,11 @@ const App = () => {
             },
           }}
         >
-          <Button htmlType="submit" className="saveButton">
+          <Button
+            htmlType="submit"
+            className="saveButton"
+            style={{ color: "#FFFF" }}
+          >
             Save
           </Button>
         </ConfigProvider>
