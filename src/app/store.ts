@@ -6,7 +6,7 @@ import {
 } from "@reduxjs/toolkit"
 import storage from "redux-persist/lib/storage"
 import { persistStore, persistReducer } from "redux-persist"
-import employeeReducer from "../features/form/reducer"
+import employeeReducer from "../features/employee/reducer"
 
 const persistConfig = {
   key: "newRootKey",
@@ -14,7 +14,7 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-  Employees: employeeReducer,
+  employees: employeeReducer,
 })
 
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducer)

@@ -3,7 +3,6 @@ import { useForm } from "antd/lib/form/Form"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../app/store"
 import { saveEmployee } from "../employee/actions"
-import { AppDispatch } from "../../app/store"
 import states from "./states"
 
 type FieldType = {
@@ -21,7 +20,7 @@ type FieldType = {
 const App = () => {
   const [form] = useForm<FieldType>()
   const dispatch = useDispatch()
-  const formState = useSelector((state: RootState) => state.Employees)
+  const formState = useSelector((state: RootState) => state.employees)
 
   const onFinish = (values: FieldType) => {
     const formData = {
@@ -31,10 +30,7 @@ const App = () => {
     }
 
     // Dispatch action pour mettre à jour l'état du formulaire dans Redux
-    // dispatch(saveFormEmployee(formData))
-    //dispatch(addEmployee(formData))
     dispatch(saveEmployee(formData))
-
     console.log("Success:", formData)
   }
 

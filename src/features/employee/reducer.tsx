@@ -1,4 +1,4 @@
-// Définissez le type pour un employé
+// type pour un employé
 export interface Employee {
   firstName: string
   lastName: string
@@ -11,18 +11,22 @@ export interface Employee {
   zipCode: number | null
 }
 
-// Définissez l'état initial du reducer
-const initialState: Employee[] = []
-// Dans votre reducer
+export interface EmployeeState {
+  employees: Employee[]
+}
+
+const initialState: EmployeeState = {
+  employees: [],
+}
+
 const employeeReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case "ADD_EMPLOYEE":
+    case "SAVE_EMPLOYEE":
       const newEmployee = {
         ...action.payload,
       }
-      return [...state, newEmployee]
+      return { ...state, employees: [...state.employees, newEmployee] }
     case "FAILURE_SAVE":
-      return initialState
     case "RESET_FORM":
       return initialState
     default:
