@@ -1,15 +1,10 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
-import { Provider, useSelector } from "react-redux"
-import { store, persistor, RootState } from "./app/store"
+import { Provider } from "react-redux"
+import { store, persistor } from "./app/store"
 import { PersistGate } from "redux-persist/integration/react"
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-  RouteProps,
-  Navigate,
-} from "react-router-dom"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 import Home from "./pages/Home"
 import List from "./pages/List"

@@ -1,10 +1,11 @@
 import CustomForm from "../features/form/form"
+import { Link } from "react-router-dom"
 function CreateEmployee() {
   return (
     <div className="form">
-      <a className="linkList" href="/list">
+      <Link className="linkList" to="/List">
         View Current Employees
-      </a>
+      </Link>
       <h2>Create Employee</h2>
       <CustomForm />
     </div>
