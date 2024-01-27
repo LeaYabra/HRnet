@@ -29,21 +29,34 @@ const App = () => {
   const handleCloseModal = () => {
     // Fermer la modale
     setIsModalVisible(false)
+    form.resetFields()
   }
 
   const [form] = useForm<FieldType>()
   const dispatch = useDispatch()
 
-  const onFinish = (values: FieldType) => {
-    const formData = {
-      ...values,
-      dateOfBirth: values.dateOfBirth.format("DD-MM-YYYY"),
-      startDate: values["startDate"].format("DD-MM-YYYY"),
-    }
+  const onFinish = async (values: FieldType) => {
+    try {
+      // Validate the form
+      await form.validateFields()
 
-    // Dispatch action pour mettre à jour l'état du formulaire dans Redux
-    dispatch(saveEmployee(formData))
-    console.log("Success:", formData)
+      const formData = {
+        ...values,
+        dateOfBirth: values.dateOfBirth.format("DD-MM-YYYY"),
+        startDate: values["startDate"].format("DD-MM-YYYY"),
+      }
+
+      // Dispatch action to save employee data
+      dispatch(saveEmployee(formData))
+      console.log("Success:", formData)
+
+      handleSaveClick()
+      setIsModalVisible(true)
+    } catch (error) {
+      // Handle form validation errors
+      console.error("Form validation failed:", error)
+      setIsModalVisible(false)
+    }
   }
 
   const onFinishFailed = (errorInfo: any) => {
@@ -158,7 +171,6 @@ const App = () => {
               htmlType="submit"
               className="saveButton"
               style={{ color: "#FFFF" }}
-              onClick={handleSaveClick}
             >
               Save
             </Button>

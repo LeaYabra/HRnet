@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    padding: 0%;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
       "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
       sans-serif;
@@ -55,4 +56,18 @@ h2{
     display: block; 
     width: 50%;
     font-size: medium;
+}
+
+/*Pour les appareils mobiles */
+@media only screen and (max-width: 600px) {
+
+.footer {
+    width: 125%;
+}
+.header {
+    width: 125%;
+}
+.form{
+    width: 115%;
+}
 }
