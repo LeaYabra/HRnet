@@ -1,4 +1,3 @@
-// actions.ts
 import { Employee } from "./reducer"
 
 // Action pour sauvegarder les données de l'employeur avec succès

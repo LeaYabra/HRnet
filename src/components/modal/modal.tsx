@@ -14,10 +14,10 @@ const MyModal: React.FC<MyModalProps> = ({ visible, onClose }) => {
       }
     }
 
-    // Ajouter un écouteur d'événements lorsque le composant est monté
+    // Ajouter un écouteur d'événements
     window.addEventListener("keydown", handleKeyDown)
 
-    // Retirer l'écouteur d'événements lorsque le composant est démonté
+    // Retirer l'écouteur d'événements
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
     }

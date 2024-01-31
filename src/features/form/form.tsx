@@ -22,12 +22,12 @@ const App = () => {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   const handleSaveClick = () => {
-    // Afficher la modale au clic sur le bouton "Save"
+    // Affiche la modale au clic sur le bouton "Save"
     setIsModalVisible(true)
   }
 
   const handleCloseModal = () => {
-    // Fermer la modale
+    // Ferme la modale
     setIsModalVisible(false)
     form.resetFields()
   }
@@ -37,23 +37,27 @@ const App = () => {
 
   const onFinish = async (values: FieldType) => {
     try {
-      // Validate the form
+      // Validation du formulaire
       await form.validateFields()
+      const stateAbbreviation =
+        states.find((state) => state.name === values.states)?.abbreviation ||
+        values.states
 
       const formData = {
         ...values,
+        states: stateAbbreviation,
         dateOfBirth: values.dateOfBirth.format("DD-MM-YYYY"),
         startDate: values["startDate"].format("DD-MM-YYYY"),
       }
 
-      // Dispatch action to save employee data
+      // Dispatch action pour sauvegarder les données de l'employé
       dispatch(saveEmployee(formData))
       console.log("Success:", formData)
 
       handleSaveClick()
       setIsModalVisible(true)
     } catch (error) {
-      // Handle form validation errors
+      // Gère les erreurs de validation du formulaire
       console.error("Form validation failed:", error)
       setIsModalVisible(false)
     }
@@ -74,6 +78,7 @@ const App = () => {
         layout="vertical"
         initialValues={{
           states: "Alabama",
+          abbreviation: "AL",
           department: "sales",
         }}
         onFinish={onFinish}
@@ -133,7 +138,10 @@ const App = () => {
           <Form.Item<FieldType> label="States" name="states">
             <Select>
               {states.map((state: any) => (
-                <Select.Option key={state.abbreviation} value={state.name}>
+                <Select.Option
+                  key={state.abbreviation}
+                  value={state.abbreviation}
+                >
                   {state.name}
                 </Select.Option>
               ))}
@@ -149,10 +157,10 @@ const App = () => {
         </fieldset>
         <Form.Item<FieldType> label="Department" name="department">
           <Select>
-            <Select.Option value="sales">Sales</Select.Option>
+            <Select.Option value="Sales">Sales</Select.Option>
             <Select.Option value="Marketing">Marketing</Select.Option>
-            <Select.Option value="engineering">Engineering</Select.Option>
-            <Select.Option value="human resources">
+            <Select.Option value="Engineering">Engineering</Select.Option>
+            <Select.Option value="Human resources">
               Human Resources
             </Select.Option>
             <Select.Option value="legal">Legal</Select.Option>

@@ -1,4 +1,4 @@
-// type pour un employé
+// Type pour un employé
 export interface Employee {
   firstName: string
   lastName: string
