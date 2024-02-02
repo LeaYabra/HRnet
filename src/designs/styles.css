@@ -35,6 +35,7 @@ code {
 
 h1,h2{
     color:#22b934;
+    text-align: center;
 }
 .form{
     display: flex;
@@ -65,16 +66,59 @@ h1,h2{
     font-size: medium;
 }
 
+/* table */
+.ant-input-search {
+    margin-bottom: 2%;
+    width: 200px;
+    float: right;
+}
+.showing{
+    color: #22b934;
+    font-weight: bold;
+}
+.table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+
 /*Pour les appareils mobiles */
 @media only screen and (max-width: 600px) {
 
 .footer {
-    width: 125%;
+    width: auto;
 }
 .header {
-    width: 125%;
+    width: 100%;
 }
 .form{
     width: 115%;
 }
 }
+
+/* styles.css (ou un autre fichier de styles) */
+@media (max-width: 767px) {
+
+
+      .ant-input-search {
+        width: 100%;
+      }
+      .table{
+       
+       
+        width: 100%;
+        box-sizing: border-box; 
+      
+        
+    }
+    .mobile-table {
+        margin: 0 auto; 
+        padding: 5%;
+       
+      }
+     
+  }
+

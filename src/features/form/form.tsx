@@ -79,7 +79,7 @@ const App = () => {
         initialValues={{
           states: "Alabama",
           abbreviation: "AL",
-          department: "sales",
+          department: "Sales",
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}

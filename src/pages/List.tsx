@@ -1,6 +1,6 @@
 import "../designs/styles.css"
 import Header from "../components/header"
-import ListEmployee from "../components/listEmployee"
+import ListEmployee from "../components/employeeList"
 import Footer from "../components/footer"
 
 function Home() {

@@ -10,55 +10,55 @@ import type { TableProps } from "antd/lib/table"
 // Définition des colonnes du tableau
 const columns: ColumnsType<Employee> = [
   {
-    title: "Prénom",
+    title: "First Name",
     dataIndex: "firstName",
     sorter: true,
     width: "11%",
   },
   {
-    title: "Nom",
+    title: "Last Name",
     dataIndex: "lastName",
     sorter: true,
     width: "11%",
   },
   {
-    title: "Date de début",
+    title: "Start Date",
     dataIndex: "startDate",
     sorter: true,
     width: "11%",
   },
   {
-    title: "Département",
+    title: "Department",
     dataIndex: "department",
     sorter: true,
     width: "13%",
   },
   {
-    title: "Date de naissance",
+    title: "Date Of Birth",
     dataIndex: "dateOfBirth",
     sorter: true,
     width: "13%",
   },
   {
-    title: "Rue",
+    title: "Street",
     dataIndex: "street",
     sorter: true,
     width: "15%",
   },
   {
-    title: "Ville",
+    title: "City",
     dataIndex: "city",
     sorter: true,
     width: "13%",
   },
   {
-    title: "État",
+    title: "States",
     dataIndex: "states",
     sorter: true,
     width: "2%",
   },
   {
-    title: "Code postal",
+    title: "Zip Code",
     dataIndex: "zipCode",
     sorter: true,
     width: "12%",
@@ -74,7 +74,7 @@ const EmployeeTable: React.FC = () => {
   const [tableParams, setTableParams] = useState<TablePaginationConfig>({
     current: 1,
     pageSize: 10,
-    total: 100,
+    total: employees.length,
   })
   const [data, setData] = useState<Employee[]>([])
   const [searchText, setSearchText] = useState("")
@@ -84,7 +84,7 @@ const EmployeeTable: React.FC = () => {
   const fetchData = useCallback(() => {
     setLoading(true)
 
-    // Applique les filtres aux données
+    // Appliquer les filtres aux données
     const filteredData = searchText
       ? employees.filter((employee) =>
           Object.values(employee).some(
@@ -96,13 +96,20 @@ const EmployeeTable: React.FC = () => {
       : employees
 
     setData(filteredData)
-    // Indique que le chargement est terminé
+
+    // Définir la valeur totale correcte en fonction des données filtrées
+    setTableParams((prevParams) => ({
+      ...prevParams,
+      total: filteredData.length,
+    }))
+
+    // Indiquer que le chargement est terminé
     setLoading(false)
   }, [searchText, employees])
 
   useEffect(() => {
     fetchData()
-  }, [fetchData, tableParams])
+  }, [fetchData, tableParams.pageSize, employees])
 
   // Fonction pour gérer les changements dans le tableau
   const handleTableChange: TableProps<Employee>["onChange"] = (
@@ -145,9 +152,9 @@ const EmployeeTable: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="mobile-table">
       <Input.Search
-        style={{ marginBottom: 16, width: 200, float: "right" }}
+        className="ant-input-search"
         placeholder="Rechercher"
         onChange={(e) => setSearchText(e.target.value)}
       />
@@ -159,12 +166,7 @@ const EmployeeTable: React.FC = () => {
         pagination={{
           ...tableParams,
           showTotal: (total, range) => (
-            <span
-              style={{
-                color: "#22b934",
-                fontWeight: "bold",
-              }}
-            >
+            <span className="showing">
               {`Showing ${range[0]} to ${range[1]} of ${total} entries`}
             </span>
           ),
