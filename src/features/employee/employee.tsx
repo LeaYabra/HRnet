@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react"
-import { Table } from "antd"
+import { Table, Input } from "antd"
 import { useSelector } from "react-redux"
 import { Employee } from "./reducer"
 import { selectEmployees } from "./selector"
 import type { ColumnsType, TablePaginationConfig } from "antd/lib/table"
-import { Input } from "antd"
 import type { TableProps } from "antd/lib/table"
 
 // Définition des colonnes du tableau
@@ -152,7 +151,7 @@ const EmployeeTable: React.FC = () => {
   }
 
   return (
-    <div className="mobile-table">
+    <div className="table">
       <Input.Search
         className="ant-input-search"
         placeholder="Rechercher"
@@ -173,6 +172,7 @@ const EmployeeTable: React.FC = () => {
         }}
         loading={loading}
         onChange={handleTableChange}
+        scroll={{ x: true }}
       />
     </div>
   )

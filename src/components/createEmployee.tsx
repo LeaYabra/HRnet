@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 function CreateEmployee() {
   return (
-    <div className="form">
+    <div className="Hrpage">
       <Link className="linkList" to="/List">
         View Current Employees
       </Link>

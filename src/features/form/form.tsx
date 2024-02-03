@@ -167,7 +167,7 @@ const App = () => {
           </Select>
         </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Form.Item wrapperCol={{ offset: 3, span: 16 }}>
           <ConfigProvider
             theme={{
               token: {
