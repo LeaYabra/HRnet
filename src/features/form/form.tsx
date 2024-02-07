@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 import { saveEmployee } from "../employee/actions"
 import states from "./states"
 import { useState } from "react"
-import MyModal from "../../components/modal/modal"
+import { MyModal } from "@leayabra/mymodal"
 
 type FieldType = {
   firstName: string
