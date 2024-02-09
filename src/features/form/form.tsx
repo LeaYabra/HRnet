@@ -186,7 +186,11 @@ const App = () => {
         </Form.Item>
       </Form>
       {isModalVisible && (
-        <MyModal visible={isModalVisible} onClose={handleCloseModal} />
+        <MyModal
+          visible={isModalVisible}
+          onClose={handleCloseModal}
+          setVisible={setIsModalVisible}
+        />
       )}
     </>
   )
