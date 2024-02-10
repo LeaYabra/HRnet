@@ -1,27 +1,51 @@
-# vite-template-redux
+# Project 14 - Switch a jQuery library to React
 
-Uses [Vite](https://vitejs.dev/), [Vitest](https://vitest.dev/), and [React Testing Library](https://github.com/testing-library/react-testing-library) to create a modern [React](https://react.dev/) app compatible with [Create React App](https://create-react-app.dev/)
+This repo contains the front-end for an internal web application update to React.
+This application manages employee files for WealthHealth company.
 
-```sh
-npx degit reduxjs/redux-templates/packages/vite-template-redux my-app
-```
+## Technologies
 
-## Goals
+- JS
+- React
 
-- Easy migration from Create React App or Vite
-- As beginner friendly as Create React App
-- Optimized performance compared to Create React App
-- Customizable without ejecting
+This project was bootstrapped with [Vite](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react).
 
-## Scripts
+## Dependencies
 
-- `dev`/`start` - start dev server and open browser
-- `build` - build for production
-- `preview` - locally preview production build
-- `test` - launch test runner
+- React-router-dom version: 6.21.1
+- react-redux version: 8.0.1
+- @reduxjs/toolkit version: 1.9.5
+- antd version: 5.12.8
+- @leayabra/mymodal: 0.1.1 ,
 
-## Inspiration
+## Authors
 
-- [Create React App](https://github.com/facebook/create-react-app/tree/main/packages/cra-template)
-- [Vite](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react)
-- [Vitest](https://github.com/vitest-dev/vitest/tree/main/examples/react-testing-lib)
+the front-end developer: Lea Yabra
+
+## Project
+
+Project contains two routes in RoutesApp (scr/Routes/RoutesApp.js).
+Employee data is stored in a REDUX store (scr/store.js scr/feature/employeesSlice.js)
+Here are the antd components used in the project :
+
+- DatePicker
+- Input
+- Select
+- InputNumber
+- Button
+- Table
+
+Here are the [MyModal](https://github.com/LeaYabra/MyModal/pkgs/npm/mymodal) components used in the project :
+
+- Modal
+
+### Prerequisites
+
+- [NodeJS ](https://nodejs.org/en/)
+
+### Launching the project
+
+- Fork the repository
+- Clone it on your computer.
+- The `npm install` command will allow you to install the dependencies.
+- The `npm start` command will allow you to run the app in the development mode.
