@@ -178,7 +178,10 @@ const App = () => {
             <Button
               htmlType="submit"
               className="saveButton"
-              style={{ color: "#FFFF" }}
+              style={{
+                color: "#22b934",
+                border: "solid #22b934",
+              }}
             >
               Save
             </Button>

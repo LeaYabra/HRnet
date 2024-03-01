@@ -47,10 +47,8 @@ h1,h2{
     color: black;
     text-decoration: none;
 }
-.saveButton {
-    background-color: #22b934;
+.saveButton {  
     border: none;
-    color: white;
     border-width: 2px;
     border-radius: 15px; 
     cursor: pointer;
