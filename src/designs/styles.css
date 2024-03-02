@@ -43,10 +43,12 @@ h1,h2{
     color:#22b934;
     text-align: center;
 }
+
 .linkList{
     color: black;
     text-decoration: none;
 }
+
 .saveButton {  
     border: none;
     border-width: 2px;
@@ -70,10 +72,12 @@ h1,h2{
     width: 200px;
     float: right;
 }
+
 .showing{
     color: #22b934;
     font-weight: bold;
 }
+
 /* Mobile */
 @media only screen and (max-width: 767px) {
     .saveButton {
@@ -85,6 +89,7 @@ h1,h2{
     }
      
 }
+
 /* Tablettes  */
 @media only screen and (max-width: 1024px) {
     .table {

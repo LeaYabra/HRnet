@@ -114,11 +114,7 @@ const EmployeeTable: React.FC = () => {
   const handleTableChange: TableProps<Employee>["onChange"] = (
     pagination,
     filters,
-    sorter,
   ) => {
-    // Log des informations de tri
-    console.log("Sorter:", sorter)
-
     // Mise à jour des paramètres de pagination
     if (pagination.pageSize !== tableParams.pageSize) {
       setTableParams({
@@ -146,7 +142,6 @@ const EmployeeTable: React.FC = () => {
       return result
     }, employees)
 
-    console.log("Données filtrées :", filteredData)
     setData(filteredData.reverse())
   }
 

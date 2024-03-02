@@ -16,7 +16,7 @@ This project was bootstrapped with [Vite](https://github.com/vitejs/vite/tree/ma
 - react-redux version: 8.0.1
 - @reduxjs/toolkit version: 1.9.5
 - antd version: 5.12.8
-- @leayabra/mymodal: 0.1.1 ,
+- @leayabra/mymodal: 0.1.2 ,
 
 ## Authors
 

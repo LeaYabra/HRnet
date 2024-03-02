@@ -52,7 +52,6 @@ const App = () => {
 
       // Dispatch action pour sauvegarder les données de l'employé
       dispatch(saveEmployee(formData))
-      console.log("Success:", formData)
 
       handleSaveClick()
       setIsModalVisible(true)
