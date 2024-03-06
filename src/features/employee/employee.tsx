@@ -114,6 +114,7 @@ const EmployeeTable: React.FC = () => {
   const handleTableChange: TableProps<Employee>["onChange"] = (
     pagination,
     filters,
+    sorter,
   ) => {
     // Mise à jour des paramètres de pagination
     if (pagination.pageSize !== tableParams.pageSize) {
@@ -128,21 +129,49 @@ const EmployeeTable: React.FC = () => {
     }
 
     // Applique les filtres aux données
-    const filteredData = Object.keys(filters).reduce((result, key) => {
-      const values = filters[key] as (string | number | Date | null)[]
-      if (values.length > 0) {
-        return result.filter((item) => {
-          const itemValue = item[key as keyof Employee]
-          return (
-            values.includes(itemValue) ||
-            (itemValue === null && values.includes(null))
-          )
-        })
-      }
-      return result
-    }, employees)
+    let filteredData = searchText
+      ? employees.filter((employee) =>
+          Object.values(employee).some(
+            (value) =>
+              value &&
+              value.toString().toLowerCase().includes(searchText.toLowerCase()),
+          ),
+        )
+      : employees
 
-    setData(filteredData.reverse())
+    // Applique le tri aux données filtrées
+    if (sorter && "order" in sorter) {
+      const { order, field } = sorter
+
+      filteredData = filteredData.sort((a, b) => {
+        // Vérifie si 'field' est une clé valide de 'Employee'
+        if (typeof field === "string" && field in a && field in b) {
+          const valueA = a[field as keyof Employee]
+          const valueB = b[field as keyof Employee]
+
+          // Gère les cas où valueA ou valueB sont null
+          if (valueA === null || valueB === null) {
+            // Place les éléments null à la fin du tableau
+            return valueA === null ? 1 : -1
+          }
+
+          // Vérifie le type de 'order' avant de comparer
+          if (typeof order === "string") {
+            // Compare les valeurs normalement si aucune n'est null
+            if (order === "ascend") {
+              return valueA > valueB ? 1 : -1
+            } else {
+              return valueA < valueB ? 1 : -1
+            }
+          }
+        }
+
+        // Gestion du cas où 'field' n'est pas une clé valide de 'Employee'
+        return 0
+      })
+    }
+
+    setData(filteredData)
   }
 
   return (
