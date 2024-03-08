@@ -67,7 +67,7 @@ h1,h2{
     padding-bottom: 20px;
 }
 
-.ant-input-search {
+.antInputSearch {
     margin-bottom: 2%;
     width: 200px;
     float: right;
@@ -78,16 +78,28 @@ h1,h2{
     font-weight: bold;
 }
 
+.showText {
+    margin-right: 5px; 
+    color:#22b934;
+}
+  
+.selectPage {
+    margin-right: 5px; 
+}
+
 /* Mobile */
 @media only screen and (max-width: 767px) {
     .saveButton {
         width: 60%;
         margin-left: 5%;   
     }
-      .ant-input-search {
+    .antInputSearch {
         width: 100%;
     }
-     
+    .selectPage {
+        margin-bottom: 10px; 
+        margin-top: 5px;
+    }     
 }
 
 /* Tablettes  */

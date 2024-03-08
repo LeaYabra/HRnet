@@ -5,7 +5,8 @@ import { Employee } from "./reducer"
 import { selectEmployees } from "./selector"
 import type { ColumnsType, TablePaginationConfig } from "antd/lib/table"
 import type { TableProps } from "antd/lib/table"
-
+import { Select } from "antd"
+const { Option } = Select
 // Définition des colonnes du tableau
 const columns: ColumnsType<Employee> = [
   {
@@ -173,14 +174,34 @@ const EmployeeTable: React.FC = () => {
 
     setData(filteredData)
   }
+  const handlePageSizeChange = (value: number) => {
+    setTableParams((prevParams) => ({
+      ...prevParams,
+      pageSize: value,
+      current: 1, // Réinitialiser la page actuelle à 1 lorsque la taille de la page change
+    }))
+  }
 
   return (
     <div className="table">
       <Input.Search
-        className="ant-input-search"
+        className="antInputSearch"
         placeholder="Rechercher"
         onChange={(e) => setSearchText(e.target.value)}
       />
+
+      <span className="showText">Show</span>
+      <Select
+        className="selectPage"
+        defaultValue={tableParams.pageSize}
+        onChange={handlePageSizeChange}
+      >
+        <Option value={10}>10 par page</Option>
+        <Option value={25}>25 par page</Option>
+        <Option value={50}>50 par page</Option>
+        <Option value={100}>100 par page</Option>
+      </Select>
+      <span className="showText">entries</span>
 
       <Table
         columns={columns}
